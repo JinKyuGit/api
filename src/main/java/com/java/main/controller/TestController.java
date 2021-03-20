@@ -11,6 +11,7 @@ import java.util.HashMap;
 @RestController
 public class TestController {
 	
+	//테스트 api
 	@RequestMapping("/test")
 	public Map<String, Object> test(){
 		
