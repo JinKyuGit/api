@@ -13,17 +13,21 @@ public class LoggerInterceptor implements HandlerInterceptor{
 
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-	@Override
-	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-		logger.info("==================== BEGIN ====================");
-		logger.info("Request URI ===> " + request.getRequestURI());
-		return true;
-	}
-
-	@Override
-	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
-		logger.info("==================== END ======================");
-		logger.info("Request URI ===> " + request.getRequestURI());
-	}
+	
+	  @Override public boolean preHandle(HttpServletRequest request,
+	  HttpServletResponse response, Object handler) throws Exception {
+		  	logger.info("==================== BEGIN ====================");
+	  		logger.info("Request URI ===> " + request.getRequestURI()); 
+	  return true; 
+	  }
+	  
+	  @Override public void postHandle(HttpServletRequest request,
+	  HttpServletResponse response, Object handler, ModelAndView modelAndView)
+	  throws Exception {
+		  	logger.info("==================== END ======================");
+		  	logger.info("Request URI ===> " + request.getRequestURI());
+		  		
+	  }
+	 
 	
 }

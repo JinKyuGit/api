@@ -23,7 +23,10 @@ public class AdminController {
 			
 			Map<String, Object> resultMap = new HashMap<String, Object>();
 			
-			resultMap.put("result", adminService.selectOneAdmin(param));
+			//임시.
+			resultMap.put("result", null);
+			
+			//resultMap.put("result", adminService.selectOneAdmin(param));
 			
 			return resultMap;
 		}
