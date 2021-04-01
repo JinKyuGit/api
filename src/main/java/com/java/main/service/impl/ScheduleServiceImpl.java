@@ -52,8 +52,20 @@ public class ScheduleServiceImpl implements ScheduleService {
 		//내일 일정.
 		ScheduleBo tomorrowBo = scheduleDao.selectSchedule(param);
 		
-		result.setToday(todayBo.getJob());
-		result.setTomorrow(tomorrowBo.getJob());
+		//예외처리.
+		if(null == todayBo || null == todayBo.getJob()) {
+			result.setToday("미정");
+		}else {
+			result.setToday(todayBo.getJob());
+		}
+		
+		if(null == tomorrowBo || null == tomorrowBo.getJob()) {
+			result.setTomorrow("미정");
+		}else {
+			result.setTomorrow(tomorrowBo.getJob());
+		}
+		
+		
 		
 		return result;
 	}
