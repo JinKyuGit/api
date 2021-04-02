@@ -1,6 +1,6 @@
 package com.java.main.bo;
 
-public class ScheduleBo {
+public class ScheduleBo extends CommonBo {
 	
 	private String today;
 	private String tomorrow;
