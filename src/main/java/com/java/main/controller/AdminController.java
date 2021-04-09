@@ -1,4 +1,4 @@
-package com.java.main.cotroller;
+package com.java.main.controller;
 
 import java.util.HashMap;
 import java.util.Map;
