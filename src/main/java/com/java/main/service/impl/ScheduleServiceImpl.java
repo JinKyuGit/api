@@ -3,6 +3,7 @@ package com.java.main.service.impl;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.Locale;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,7 +26,7 @@ public class ScheduleServiceImpl implements ScheduleService {
 		SimpleDateFormat checkSdf = new SimpleDateFormat("HH");
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 		
-		Calendar cal = new GregorianCalendar();
+		Calendar cal = new GregorianCalendar(Locale.KOREA);
 		
 		int hour = Integer.parseInt(checkSdf.format(cal.getTime()));
 		String today = sdf.format(cal.getTime());
@@ -34,7 +35,7 @@ public class ScheduleServiceImpl implements ScheduleService {
 		
 		//오전 5시 이전 -> 하루를 뺀다.
 		if(hour < 5) {
-			cal = new GregorianCalendar();
+			cal = new GregorianCalendar(Locale.KOREA);
 			tomorrow = today;
 			cal.add(Calendar.DATE, -1); // 오늘날짜로부터 -1
 			today = sdf.format(cal.getTime());		
@@ -82,7 +83,7 @@ public class ScheduleServiceImpl implements ScheduleService {
 		String todayPrefix = "";
 		String tomorrowPrefix = "";
 		
-		Calendar cal = new GregorianCalendar();
+		Calendar cal = new GregorianCalendar(Locale.KOREA);
 		
 		int hour = Integer.parseInt(checkSdf.format(cal.getTime()));
 		String today = sdf.format(cal.getTime());
@@ -94,7 +95,7 @@ public class ScheduleServiceImpl implements ScheduleService {
 		
 		//오전 5시 이전 -> 하루를 뺀다.
 		if(hour < 5) {
-			cal = new GregorianCalendar();
+			cal = new GregorianCalendar(Locale.KOREA);
 			tomorrow = today;
 			tomorrowPrefix = todayPrefix;
 			cal.add(Calendar.DATE, -1); // 오늘날짜로부터 -1
