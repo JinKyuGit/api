@@ -3,9 +3,25 @@ package com.java.main.bo;
 public class ScheduleBo extends CommonBo {
 	
 	private String today;
+	private String yesterday;
+	private int currentHour;
 	private String tomorrow;
 	private String job;
 	
+	
+	
+	public String getYesterday() {
+		return yesterday;
+	}
+	public void setYesterday(String yesterday) {
+		this.yesterday = yesterday;
+	}
+	public int getCurrentHour() {
+		return currentHour;
+	}
+	public void setCurrentHour(int currentHour) {
+		this.currentHour = currentHour;
+	}
 	public String getToday() {
 		return today;
 	}

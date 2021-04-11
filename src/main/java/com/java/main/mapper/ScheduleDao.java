@@ -12,6 +12,10 @@ public class ScheduleDao extends CommonDao{
 		this.nameSpace = "scheduleDao";
 	}
 	
+	public ScheduleBo selectDate() throws Exception {
+		return selectOne("selectDate");
+	}
+	
 	public ScheduleBo selectSchedule(ScheduleBo param) throws Exception {
 		return selectOne("selectSchedule", param);
 	}
