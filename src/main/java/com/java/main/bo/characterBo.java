@@ -1,12 +1,18 @@
 package com.java.main.bo;
 
-public class characterBo {
+public class characterBo extends CommonBo {
 	
+	private String chracterId;
 	private String characterName;
 	private String characterAlias;
 	private String location;
 	
-	
+	public String getChracterId() {
+		return chracterId;
+	}
+	public void setChracterId(String chracterId) {
+		this.chracterId = chracterId;
+	}
 	public String getCharacterName() {
 		return characterName;
 	}
