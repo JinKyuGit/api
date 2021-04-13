@@ -27,6 +27,7 @@
 			and df_3_character_id = #{df_3_character_id}
 			and df_4_character_id = #{df_4_character_id}
 			and df_5_character_id = #{df_5_character_id}
+		order by reg_date desc
 	</select>
 
 </mapper>
