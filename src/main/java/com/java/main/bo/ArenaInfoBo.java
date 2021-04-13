@@ -1,6 +1,6 @@
 package com.java.main.bo;
 
-public class ArenaInfo extends CommonBo {
+public class ArenaInfoBo extends CommonBo {
 	
 	private int deckNo;
 	private String df_1_character_id;

@@ -1,9 +1,12 @@
 package com.java.main.service;
 
-import com.java.main.bo.ArenaInfo;
+import java.util.List;
+
+import com.java.main.bo.ArenaInfoBo;
 
 public interface ArenaService {
 
-	public ArenaInfo sort(ArenaInfo param) throws Exception;
+	public ArenaInfoBo sort(ArenaInfoBo param) throws Exception;
 	
+	public List<ArenaInfoBo> searchArena(ArenaInfoBo param) throws Exception;
 }

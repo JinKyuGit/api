@@ -6,12 +6,14 @@ import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.java.main.bo.AdminBo;
-import com.java.main.bo.ArenaInfo;
+import com.java.main.bo.ArenaInfoBo;
+import com.java.main.service.ArenaService;
 
 @RestController
 public class ArenaController {
@@ -19,22 +21,17 @@ public class ArenaController {
 	
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	
+	@Autowired
+	private ArenaService arenaSerivce;
+	
 	@RequestMapping("/searchArena")
-	public Map<String, Object> test(@RequestBody ArenaInfo param) throws Exception{
+	public Map<String, Object> test(@RequestBody ArenaInfoBo param) throws Exception{
 		
-		logger.error("check : >>>>");
-		logger.error(param.getDf_1_character_id());
-		logger.error(param.getDf_2_character_id());
-		logger.error(param.getDf_3_character_id());
-		logger.error(param.getDf_4_character_id());
-		logger.error(param.getDf_5_character_id());
 		
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		
 		//임시.
-		resultMap.put("result", new ArrayList<ArenaInfo>());
-		
-		//resultMap.put("result", adminService.selectOneAdmin(param));
+		resultMap.put("result", arenaSerivce.searchArena(param));
 		
 		return resultMap;
 	}
