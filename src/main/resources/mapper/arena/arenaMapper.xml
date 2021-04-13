@@ -7,6 +7,7 @@
 	<![CDATA[ /* [arenaDao.xml] searchArena */ ]]>
 		
 	    select 
+	    	deck_no,
 			of_1_character_id,
 			of_1_star,
 			of_2_character_id,
@@ -16,7 +17,9 @@
 			of_4_character_id,
 			of_4_star,
 			of_5_character_id,
-			of_5_star
+			of_5_star,
+			reg_nick,
+			date_format(reg_date, '%Y%m%d') as reg_date
 		from arena_info
 			where 1=1
 			and df_1_character_id = #{df_1_character_id}
