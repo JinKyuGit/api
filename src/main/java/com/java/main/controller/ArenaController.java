@@ -22,8 +22,12 @@ public class ArenaController {
 	@RequestMapping("/searchArena")
 	public Map<String, Object> test(@RequestBody ArenaInfo param) throws Exception{
 		
-		logger.error("check : >>>>"+param.toString());
-		
+		logger.error("check : >>>>");
+		logger.error(param.getDf_1_character_id());
+		logger.error(param.getDf_2_character_id());
+		logger.error(param.getDf_3_character_id());
+		logger.error(param.getDf_4_character_id());
+		logger.error(param.getDf_5_character_id());
 		
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		
