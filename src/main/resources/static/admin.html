@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+아레나정보 관리
+<br>
+방덱 조회 - 아이디를 입력해주세요.(순서는 상관없고 '숫자'만 입력해주시면 알아서 처리됩니다. ch_1 -> 1만 입력) <br>
+첫번째 캐릭터 id : <input type="text" id="id1"><br>
+두번째 캐릭터 id : <input type="text" id = "id2"><br>
+세번째 캐릭터 id : <input type="text" id="id3"><br>
+네번째 캐릭터 id : <input type="text" id = "id4"><br>
+다섯번째 캐릭터 id : <input type="text" id="id5"><br>
+
+<button id="search" onclick="search()">조회</button>
+<br>
+<br>
+
+
+<div id="deleteDiv">
+삭제할 덱 번호 입력 : <input type="text" id="deckNo">
+<button id="hide" onclick="deleteDeck()">삭제</button>
+</div>
+
+ID 목록 
+<button id="show" onclick="show()">펼치기</button>
+<button id="hide" onclick="hide()">접기</button>
+<div id="idList"></div>
+<div id="searchList"></div>
+
+
+</body>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script>
+window.onload = function(){
+	
+	$.ajax({
+        url:'https://api-hitya.com/getChacterInfo',
+        type:'POST',
+        contentType : "application/json; charset=utf-8",
+        data: JSON.stringify({
+        }),
+        dataType:'json', // 리턴해주는 타입을 지정해줘야함
+        beforeSend:function(json) {
+            console.log("ajax호출전");
+        },// 서버 요청 전 호출 되는 함수 return false; 일 경우 요청 중단
+        success: function(data) {
+            console.log("호출성공");
+            console.log(data);
+            
+            var div = $('#idList')
+            
+            for(var i = 0; i < data.result.length; i++){
+            	div.append(data.result[i].characterName+" : "+data.result[i].characterId+"<br>")
+            }
+            
+            
+        },// 요청 완료 시
+        error:function(json) {
+            console.log("실패입니다.");
+        }// 요청 실패.
+    });
+}
+
+function search(){
+	
+	//아이디 목록 숨김.
+	hide();
+	
+	var df1 = $('#id1').val()
+	var df2 = $('#id2').val()
+	var df3 = $('#id3').val()
+	var df4 = $('#id4').val()
+	var df5 = $('#id5').val()
+	
+	$.ajax({
+        url:'https://api-hitya.com/searchArenaAdmin',
+        type:'POST',
+        contentType : "application/json; charset=utf-8",
+        data: JSON.stringify({
+        	df_1_character_id : df1,
+        	df_2_character_id : df2,
+        	df_3_character_id : df3,
+        	df_4_character_id : df4,
+        	df_5_character_id : df5
+        }),
+        dataType:'json', // 리턴해주는 타입을 지정해줘야함
+        beforeSend:function(json) {
+            console.log("ajax호출전");
+        },// 서버 요청 전 호출 되는 함수 return false; 일 경우 요청 중단
+        success: function(data) {
+            console.log("호출성공");
+            console.log(data);
+            
+            var div = $('#searchList')
+            
+            for(var i = 0; i < data.result.length; i++){
+            	div.append("덱 번호 : "+data.result[i].deckNo+
+            	" 공덱 :"+ data.result[i].of_1_character_id+", "
+            	        + data.result[i].of_2_character_id+", "
+            	        + data.result[i].of_3_character_id+", "
+            	        + data.result[i].of_4_character_id+", "
+            	        + data.result[i].of_5_character_id+"<br>")
+        }
+            
+        },// 요청 완료 시
+        error:function(json) {
+            console.log("실패입니다.");
+        }// 요청 실패.
+    });
+}
+
+
+function deleteDeck(){
+	
+	var deckNo = $('#deckNo').val()
+	
+	$.ajax({
+        url:'https://api-hitya.com/deleteArena',
+        type:'POST',
+        contentType : "application/json; charset=utf-8",
+        data: JSON.stringify({
+        	deckNo : deckNo
+        }),
+        dataType:'json', // 리턴해주는 타입을 지정해줘야함
+        beforeSend:function(json) {
+            console.log("ajax호출전");
+        },// 서버 요청 전 호출 되는 함수 return false; 일 경우 요청 중단
+        success: function(data) {
+            console.log("호출성공");
+            console.log(data);
+            
+            if(data.result.resultCode == "OK"){
+            	alert("삭제되었습니다.");
+            	var div = $('#searchList')
+            	div.text('')
+            	search();
+            }else {
+            	alert("오류 발생. 히트야에게 문의하세요.");
+            }
+        },// 요청 완료 시
+        error:function(json) {
+            console.log("실패입니다.");
+        }// 요청 실패.
+    });
+	
+	
+}
+
+function show(){
+	$('#idList').show()
+}
+function hide(){
+	$('#idList').hide()
+}
+
+</script>
+</html>

@@ -18,12 +18,20 @@ public class ArenaDao extends CommonDao {
 		return selectList("searchArena", param);
 	}
 	
+	public List<ArenaInfoBo> searchArenaAdmin(ArenaInfoBo param) throws Exception{
+		return selectList("searchArenaAdmin", param);
+	}
+	
 	public ArenaInfoBo duplicateCheck(ArenaInfoBo param) throws Exception {
 		return selectOne("duplicateCheck", param);
 	}
 	
 	public int insertArenaInfo(ArenaInfoBo param) throws Exception {
 		return insert("insertArenaInfo", param);
+	}
+	
+	public int deleteArenaInfo(ArenaInfoBo param) throws Exception {
+		return delete("deleteArenaInfo", param);
 	}
 
 }

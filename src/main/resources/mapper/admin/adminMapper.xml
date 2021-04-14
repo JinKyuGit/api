@@ -7,13 +7,21 @@
 	<![CDATA[ /* [adminDao.xml] selectOneAdmin */ ]]>
 	
 	SELECT
-		id as id,
-		password as password,
 		name as name,
 		use_yn as useYn
 	FROM admin
 	WHERE id = #{id}
 	AND password = #{password}
+	</select>
+	
+	   <select id="selectCharacterList" resultType="com.java.main.bo.CharacterBo">
+	<![CDATA[ /* [adminDao.xml] selectCharacterList */ ]]>
+	
+	SELECT
+		character_id as characterId,
+		character_name as characterName
+	FROM character_info
+	order by character_id
 	</select>
 
 </mapper>

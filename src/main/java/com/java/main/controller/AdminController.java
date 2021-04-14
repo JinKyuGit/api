@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.java.main.bo.AdminBo;
+import com.java.main.bo.ArenaInfoBo;
 import com.java.main.service.AdminService;
+import com.java.main.service.ArenaService;
 
 @RestController
 public class AdminController {
@@ -17,16 +19,50 @@ public class AdminController {
 	
 		@Autowired
 		private AdminService adminService;
+		
+		@Autowired
+		private ArenaService arenaSerivce;
 	   
 		@RequestMapping("/adminLogin")
-		public Map<String, Object> test(@RequestBody AdminBo param) throws Exception{
+		public Map<String, Object> adminLogin(@RequestBody AdminBo param) throws Exception{
 			
 			Map<String, Object> resultMap = new HashMap<String, Object>();
 			
-			//임시.
-			resultMap.put("result", null);
+			resultMap.put("result", adminService.selectOneAdmin(param));
 			
-			//resultMap.put("result", adminService.selectOneAdmin(param));
+			return resultMap;
+		}
+		
+		@RequestMapping("/getChacterInfo")
+		public Map<String, Object> getChacterInfo() throws Exception {
+			
+			
+			Map<String, Object> resultMap = new HashMap<String, Object>();
+			
+			resultMap.put("result", adminService.selectCharacterList());
+			
+			return resultMap;
+			
+		}
+		
+		@RequestMapping("/searchArenaAdmin")
+		public Map<String, Object> searchArenaAdmin(@RequestBody ArenaInfoBo param) throws Exception{
+			
+			
+			Map<String, Object> resultMap = new HashMap<String, Object>();
+
+			resultMap.put("result", arenaSerivce.searchArenaAdmin(param));
+			
+			return resultMap;
+		}
+		
+		@RequestMapping("/deleteArena")
+		public Map<String, Object> deleteArena(@RequestBody ArenaInfoBo param) throws Exception{
+			
+			
+			Map<String, Object> resultMap = new HashMap<String, Object>();
+
+			resultMap.put("result", arenaSerivce.deleteArenaInfo(param));
 			
 			return resultMap;
 		}

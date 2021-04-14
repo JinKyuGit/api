@@ -117,6 +117,44 @@ public class ArenaServiceImpl implements ArenaService {
 		
 	}
 
+	@Override
+	public List<ArenaInfoBo> searchArenaAdmin(ArenaInfoBo param) throws Exception {
+		
+		//관리자페이지에서는 숫자만 받음. prefix처리
+		String prefix = "ch_";
+		
+		param.setDf_1_character_id(prefix+param.getDf_1_character_id());
+		param.setDf_2_character_id(prefix+param.getDf_2_character_id());
+		param.setDf_3_character_id(prefix+param.getDf_3_character_id());
+		param.setDf_4_character_id(prefix+param.getDf_4_character_id());
+		param.setDf_5_character_id(prefix+param.getDf_5_character_id());
+		
+		
+		//정렬
+		ArenaInfoBo sorted = this.sort(param);
+		
+		return arenaDao.searchArenaAdmin(sorted);
+		
+		
+	}
+
+	@Override
+	public ArenaInfoBo deleteArenaInfo(ArenaInfoBo param) throws Exception {
+		
+		ArenaInfoBo result =  new ArenaInfoBo();
+		
+		int deleteResult = arenaDao.deleteArenaInfo(param);
+		
+		if(deleteResult > 0) {
+			result.setResultCode("OK");
+		}else {
+			result.setResultCode("ERROR");
+		}
+		
+		
+		return result;
+	}
+
 	
 	
 }

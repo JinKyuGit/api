@@ -10,5 +10,9 @@ public interface ArenaService {
 	
 	public List<ArenaInfoBo> searchArena(ArenaInfoBo param) throws Exception;
 	
+	public List<ArenaInfoBo> searchArenaAdmin(ArenaInfoBo param) throws Exception;
+	
 	public ArenaInfoBo register(ArenaInfoBo param) throws Exception;
+	
+	public ArenaInfoBo deleteArenaInfo(ArenaInfoBo param) throws Exception;
 }

@@ -7,7 +7,7 @@
 	<![CDATA[ /* [arenaDao.xml] searchArena */ ]]>
 		
 	    select 
-	    	deck_no,
+	    	deck_no as deckNo,
 			of_1_character_id,
 			of_1_star,
 			of_2_character_id,
@@ -18,6 +18,28 @@
 			of_4_star,
 			of_5_character_id,
 			of_5_star,
+			ifnull(reg_nick, '없음') as regNick,
+			date_format(reg_date, '%Y/%m/%d') as regDate
+		from arena_info
+			where 1=1
+			and df_1_character_id = #{df_1_character_id}
+			and df_2_character_id = #{df_2_character_id}
+			and df_3_character_id = #{df_3_character_id}
+			and df_4_character_id = #{df_4_character_id}
+			and df_5_character_id = #{df_5_character_id}
+		order by reg_date desc
+	</select>
+	
+	<select id="searchArenaAdmin" parameterType="com.java.main.bo.ArenaInfoBo" resultType="com.java.main.bo.ArenaInfoBo">
+	<![CDATA[ /* [arenaDao.xml] searchArenaAdmin */ ]]>
+		
+	    select 
+	    	deck_no as deckNo,
+			(select character_name from character_info where character_id = of_1_character_id) as of_1_character_id,
+			(select character_name from character_info where character_id = of_2_character_id) as of_2_character_id,
+			(select character_name from character_info where character_id = of_3_character_id) as of_3_character_id,
+			(select character_name from character_info where character_id = of_4_character_id) as of_4_character_id,
+          	(select character_name from character_info where character_id = of_5_character_id) as of_5_character_id,
 			ifnull(reg_nick, '없음') as regNick,
 			date_format(reg_date, '%Y/%m/%d') as regDate
 		from arena_info
@@ -89,5 +111,12 @@
 	)
 	
 	</insert>
+	
+	<delete id="deleteArenaInfo"  parameterType="com.java.main.bo.ArenaInfoBo">
+		<![CDATA[ /* [arenaDao.xml] deleteArenaInfo */ ]]>
+	delete from arena_info
+	where deck_no = #{deckNo}
+	
+	</delete>
 
 </mapper>
