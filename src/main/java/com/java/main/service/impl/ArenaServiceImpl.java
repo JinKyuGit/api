@@ -88,6 +88,11 @@ public class ArenaServiceImpl implements ArenaService {
 		
 		ArenaInfoBo sorted = this.sort(param);
 		
+		//닉네임 가져감
+		if(null != param.getRegNick() && !"".equals(param.getRegNick())) {
+			sorted.setRegNick(param.getRegNick());
+		}
+		
 		//중복 체크
 		
 		ArenaInfoBo dup = arenaDao.duplicateCheck(sorted);
