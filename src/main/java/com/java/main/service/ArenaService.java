@@ -9,4 +9,6 @@ public interface ArenaService {
 	public ArenaInfoBo sort(ArenaInfoBo param) throws Exception;
 	
 	public List<ArenaInfoBo> searchArena(ArenaInfoBo param) throws Exception;
+	
+	public ArenaInfoBo register(ArenaInfoBo param) throws Exception;
 }

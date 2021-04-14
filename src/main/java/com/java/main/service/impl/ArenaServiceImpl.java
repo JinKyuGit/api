@@ -41,12 +41,33 @@ public class ArenaServiceImpl implements ArenaService {
 		sorted.setDf_4_character_id(prefix+numArray[3]);
 		sorted.setDf_5_character_id(prefix+numArray[4]);
 		
+		//공덱이 있는 경우 공덱도 정렬	
+		if(null != param.getOf_1_character_id() && !"".equals(param.getOf_1_character_id())){
+			
+			int [] ofArray = new int[5];
+			
+			ofArray[0] = Integer.parseInt(param.getOf_1_character_id().substring(3, param.getOf_1_character_id().length()));
+			ofArray[1] = Integer.parseInt(param.getOf_2_character_id().substring(3, param.getOf_2_character_id().length()));
+			ofArray[2] = Integer.parseInt(param.getOf_3_character_id().substring(3, param.getOf_3_character_id().length()));
+			ofArray[3] = Integer.parseInt(param.getOf_4_character_id().substring(3, param.getOf_4_character_id().length()));
+			ofArray[4] = Integer.parseInt(param.getOf_5_character_id().substring(3, param.getOf_5_character_id().length()));
+			
+			Arrays.sort(ofArray);
+			
+			sorted.setOf_1_character_id(prefix+ofArray[0]);
+			sorted.setOf_2_character_id(prefix+ofArray[1]);
+			sorted.setOf_3_character_id(prefix+ofArray[2]);
+			sorted.setOf_4_character_id(prefix+ofArray[3]);
+			sorted.setOf_5_character_id(prefix+ofArray[4]);
+		}
+		
 		
 		
 		return sorted;
 		
 	}
 
+	//조회
 	@Override
 	public List<ArenaInfoBo> searchArena(ArenaInfoBo param) throws Exception {
 		
@@ -54,6 +75,40 @@ public class ArenaServiceImpl implements ArenaService {
 		ArenaInfoBo sorted = this.sort(param);
 		
 		return arenaDao.searchArena(sorted);
+		
+	}
+
+	//등록
+	@Override
+	public ArenaInfoBo register(ArenaInfoBo param) throws Exception {
+		
+		ArenaInfoBo result = new ArenaInfoBo();
+		
+		result.setResultCode("OK");
+		
+		ArenaInfoBo sorted = this.sort(param);
+		
+		//중복 체크
+		
+		ArenaInfoBo dup = arenaDao.duplicateCheck(sorted);
+		
+		if(null != dup && dup.getCnt() > 0) {
+			result.setResultCode("DUPLICATE");
+		}else {
+			try {
+				int insertResult = arenaDao.insertArenaInfo(sorted);	
+				
+				if(insertResult < 1) {
+					result.setResultCode("ERROR");
+				}else {
+					result.setResultCode("OK");
+				}				
+			} catch(Exception e) {
+				result.setResultCode("ERROR");
+			}	
+		}
+		
+		return result;
 		
 	}
 

@@ -25,7 +25,23 @@ public class ArenaInfoBo extends CommonBo {
 	private int of_5_star;
 	private String regNick;
 	private String regDate;
+	private String resultCode;
+	private int cnt;
 	
+	
+	
+	public int getCnt() {
+		return cnt;
+	}
+	public void setCnt(int cnt) {
+		this.cnt = cnt;
+	}
+	public String getResultCode() {
+		return resultCode;
+	}
+	public void setResultCode(String resultCode) {
+		this.resultCode = resultCode;
+	}
 	public int getDeckNo() {
 		return deckNo;
 	}

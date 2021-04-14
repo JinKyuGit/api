@@ -25,13 +25,23 @@ public class ArenaController {
 	private ArenaService arenaSerivce;
 	
 	@RequestMapping("/searchArena")
-	public Map<String, Object> test(@RequestBody ArenaInfoBo param) throws Exception{
+	public Map<String, Object> searchArena(@RequestBody ArenaInfoBo param) throws Exception{
+		
+		
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+
+		resultMap.put("result", arenaSerivce.searchArena(param));
+		
+		return resultMap;
+	}
+	
+	@RequestMapping("/registerArena")
+	public Map<String, Object> registerArena(@RequestBody ArenaInfoBo param) throws Exception{
 		
 		
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		
-		//임시.
-		resultMap.put("result", arenaSerivce.searchArena(param));
+		resultMap.put("result", arenaSerivce.register(param));
 		
 		return resultMap;
 	}

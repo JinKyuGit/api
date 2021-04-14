@@ -3,7 +3,7 @@
 <mapper namespace="arenaDao">
 
 	
-	<select id="searchArena" resultType="com.java.main.bo.ArenaInfoBo">
+	<select id="searchArena" parameterType="com.java.main.bo.ArenaInfoBo" resultType="com.java.main.bo.ArenaInfoBo">
 	<![CDATA[ /* [arenaDao.xml] searchArena */ ]]>
 		
 	    select 
@@ -29,5 +29,65 @@
 			and df_5_character_id = #{df_5_character_id}
 		order by reg_date desc
 	</select>
+	
+	<select id="duplicateCheck" parameterType="com.java.main.bo.ArenaInfoBo" resultType="com.java.main.bo.ArenaInfoBo">
+	<![CDATA[ /* [arenaDao.xml] duplicateCheck */ ]]>
+		
+		select
+			count(1) as cnt
+		from arena_info
+		where 1=1
+			and df_1_character_id = #{df_1_character_id}
+			and df_2_character_id = #{df_2_character_id}
+			and df_3_character_id = #{df_3_character_id}
+			and df_4_character_id = #{df_4_character_id}
+			and df_5_character_id = #{df_5_character_id}
+			and of_1_character_id = #{of_1_character_id}
+			and of_2_character_id = #{of_2_character_id}
+			and of_3_character_id = #{of_3_character_id}
+			and of_4_character_id = #{of_4_character_id}
+			and of_5_character_id = #{of_5_character_id}
+	</select>
+	
+	<insert id="insertArenaInfo" parameterType="com.java.main.bo.ArenaInfoBo">
+	<![CDATA[ /* [arenaDao.xml] insertArenaInfo */ ]]>
+	insert into arena_info
+	(
+	df_1_character_id,
+	df_2_character_id,
+	df_3_character_id,
+	df_4_character_id,
+	df_5_character_id,
+	
+	of_1_character_id,
+	of_2_character_id,
+	of_3_character_id,
+	of_4_character_id,
+	of_5_character_id,
+	<if test="regNick != null and regNick != '' ">
+	reg_nick,
+	</if>
+	reg_date
+		
+	) values 
+	(
+	#{df_1_character_id},
+	#{df_2_character_id},
+	#{df_3_character_id},
+	#{df_4_character_id},
+	#{df_5_character_id},
+	
+	#{of_1_character_id},
+	#{of_2_character_id},
+	#{of_3_character_id},
+	#{of_4_character_id},
+	#{of_5_character_id},
+	<if test="regNick != null and regNick != '' ">
+	#{regNick},
+	</if>
+	NOW()
+	)
+	
+	</insert>
 
 </mapper>
