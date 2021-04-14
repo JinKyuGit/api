@@ -18,7 +18,7 @@
 			of_4_star,
 			of_5_character_id,
 			of_5_star,
-			reg_nick as regNick,
+			ifnull(reg_nick, '없음') as regNick,
 			date_format(reg_date, '%Y/%m/%d') as regDate
 		from arena_info
 			where 1=1
