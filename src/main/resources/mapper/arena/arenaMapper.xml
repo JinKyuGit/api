@@ -69,6 +69,7 @@
 			and of_3_character_id = #{of_3_character_id}
 			and of_4_character_id = #{of_4_character_id}
 			and of_5_character_id = #{of_5_character_id}
+		limit 1
 	</select>
 	
 	<insert id="insertArenaInfo" parameterType="com.java.main.bo.ArenaInfoBo">
@@ -118,5 +119,24 @@
 	where deck_no = #{deckNo}
 	
 	</delete>
+	
+	<select id="selectCharacterNameByAlias" parameterType="com.java.main.bo.CharacterBo" resultType="com.java.main.bo.CharacterBo">
+	select 
+	character_name as characterName
+	from character_info
+	where 
+	character_alias = #{characterAlias}
+	
+	</select>
+	
+	<select id="selectChracterIdByName" parameterType="com.java.main.bo.CharacterBo" resultType="com.java.main.bo.CharacterBo">
+	select 
+	character_id as characterId
+	from character_info
+	where 
+	character_name = #{characterName}
+	
+	</select>
+	
 
 </mapper>
