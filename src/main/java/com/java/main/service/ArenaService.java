@@ -15,4 +15,8 @@ public interface ArenaService {
 	public ArenaInfoBo register(ArenaInfoBo param) throws Exception;
 	
 	public ArenaInfoBo deleteArenaInfo(ArenaInfoBo param) throws Exception;
+	
+	public void translateOne() throws Exception;
+	
+	public void insertByFile() throws Exception;
 }

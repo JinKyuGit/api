@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -63,6 +64,33 @@ public class AdminController {
 			Map<String, Object> resultMap = new HashMap<String, Object>();
 
 			resultMap.put("result", arenaSerivce.deleteArenaInfo(param));
+			
+			return resultMap;
+		}
+		
+		@RequestMapping("/readFile")
+	    public Map<String, Object> readFile() throws Exception{
+			
+			
+			Map<String, Object> resultMap = new HashMap<String, Object>();
+			
+			arenaSerivce.translateOne();
+			
+			resultMap.put("result", "OK");
+			
+			return resultMap;
+		}
+		
+		@Transactional
+		@RequestMapping("/insertByFile")
+	    public Map<String, Object> insertByFile() throws Exception{
+			
+			
+			Map<String, Object> resultMap = new HashMap<String, Object>();
+			
+			arenaSerivce.insertByFile();
+			
+			resultMap.put("result", "OK");
 			
 			return resultMap;
 		}
