@@ -66,7 +66,7 @@ public class ArenaServiceImpl implements ArenaService {
 		
 		
 		//공덱 데이터가 있을 경우 마찬가지로 처리.
-		if(null != param.getOf_1_character_id()) {
+		if(null != param.getOf_1_character_id() && !"".equals(param.getOf_1_character_id())) {
 			
 	        CharacterBo [] ofList = new CharacterBo[5];
 	    	CharacterBo ofParam = new CharacterBo();
@@ -328,7 +328,8 @@ public class ArenaServiceImpl implements ArenaService {
 			} // for
 			index++;
 			arenaInfoBo.setRegNick("단풍나무클랜");
-			this.register(arenaInfoBo);
+			//정렬할 필요 없음.
+			arenaDao.insertArenaInfo(arenaInfoBo);
 	
 		}
 		
