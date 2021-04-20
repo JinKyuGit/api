@@ -215,8 +215,8 @@ public class ArenaServiceImpl implements ArenaService {
 	public void translateOne() throws Exception {
 		
 	
-		String fileDir = "C://Users//DELL//Desktop//test.txt";
-		String outFileDir = "C://Users//DELL//Desktop//new.txt";
+		String fileDir = "C://Users//DELL//Desktop//original.txt";
+		String outFileDir = "C://Users//DELL//Desktop//translate1.txt";
 		
 		File file = new File(fileDir);
 		File outFile = new File(outFileDir);
@@ -249,10 +249,69 @@ public class ArenaServiceImpl implements ArenaService {
 			
 			
 			bufferedWriter.newLine();
-		}
+		} // while
 		
 		bufferedWriter.close();
 		
+		
+		//1차 변환 후, 2차 변환을 실시해본다.
+		inFile = new BufferedReader(new FileReader(file));
+		File newFile = new File(outFileDir); // test
+		BufferedReader inFile2 = new BufferedReader(new FileReader(newFile)); //new 
+		
+		File outFile2 = new File("C://Users//DELL//Desktop//translate2.txt");
+		BufferedWriter bufferedWriter2 = new BufferedWriter(new FileWriter(outFile2));
+		String alias = "";
+		String [] translate1 = new String[5];
+		
+		while((alias = inFile.readLine()) != null){
+			
+			String temp = inFile2.readLine();
+			
+			translate1 = temp.split(",");		
+			
+			for(int i = 0; i < translate1.length; i++) {
+				
+				if("?".equals(translate1[i])) {
+					
+						//prev, next를 각각 구해야함.
+						CharacterBo priorityParam = new CharacterBo();
+						priorityParam.setCharacterAlias(alias.substring(i, i+1));
+						
+						//prev
+						if(i != 0 && !"?".equals(translate1[i-1])) {
+							
+							CharacterBo prevParam = new CharacterBo();
+							prevParam.setCharacterName(translate1[i-1]);
+							
+							CharacterBo prev = characterDao.selectCharacterByName(prevParam);
+							priorityParam.setPrev(prev.getPriority());
+
+						}
+							//next
+						if(i != 4 && !"?".equals(translate1[i+1])) {
+							
+							CharacterBo nextParam = new CharacterBo();
+							nextParam.setCharacterName(translate1[i+1]);
+							
+							CharacterBo next = characterDao.selectCharacterByName(nextParam);
+							priorityParam.setNext(next.getPriority());	
+						}
+
+						List<CharacterBo> list = characterDao.selectCharacterByPriority(priorityParam);
+						
+						if(null != list && list.size() == 1) {						
+							translate1[i] = list.get(0).getCharacterName();											
+						}
+				} //if
+				bufferedWriter2.write(translate1[i]+",");
+			} // for
+			bufferedWriter2.newLine();
+		} // while
+		
+		bufferedWriter2.close();
+		
+
 	}
 
 	@Override

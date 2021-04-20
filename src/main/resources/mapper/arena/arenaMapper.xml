@@ -122,7 +122,8 @@
 	
 	<select id="selectCharacterNameByAlias" parameterType="com.java.main.bo.CharacterBo" resultType="com.java.main.bo.CharacterBo">
 	select 
-	character_name as characterName
+	 character_name as characterName
+	,priority as priority
 	from character_info
 	where 
 	character_alias = #{characterAlias}

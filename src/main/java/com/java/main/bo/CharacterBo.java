@@ -7,6 +7,8 @@ public class CharacterBo extends CommonBo   {
 	private String characterAlias;
 	private int location;
 	private int priority;
+	private int next;
+	private int prev;
 	
 	public String getCharacterId() {
 		return characterId;
@@ -37,6 +39,18 @@ public class CharacterBo extends CommonBo   {
 	}
 	public void setPriority(int priority) {
 		this.priority = priority;
+	}
+	public int getNext() {
+		return next;
+	}
+	public void setNext(int next) {
+		this.next = next;
+	}
+	public int getPrev() {
+		return prev;
+	}
+	public void setPrev(int prev) {
+		this.prev = prev;
 	}
 	
 
