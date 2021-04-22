@@ -5,6 +5,7 @@
 <title>관리자 페이지</title>
 </head>
 <body>
+<h1>관리자 페이지에 오신 것을 환영합니다.</h1>
 아이디 : <input type="text" id="id">
 비밀번호 : <input type="text" id = "password">
 <button id="loginBtn" onclick="login()">로그인</button>
@@ -31,7 +32,7 @@ function login(){
 	
 	
 	 $.ajax({
-	        url:'https://api-hitya.com/adminLogin',
+	        url:'http://localhost:8090/adminLogin',
 	        type:'POST',
 	        contentType : "application/json; charset=utf-8",
 	        data: JSON.stringify({

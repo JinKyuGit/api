@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+아레나정보 등록.
+<br>
+사용법 <br>
+1.방덱 및 공덱에 각각 약어를 입력해주세요.(5글자) 
+<br>
+2.변환하기를 누르면 아래 변환된 결과가 표시됩니다(풀네임)
+<br>
+3. 변환된 결과를 확인 및 수정하여 등록버튼을 눌러주세요.
+<br>
+<br>
+방덱(약어)
+<input type="text" id="dfAlias">
+vs
+공덱(약어)
+<input type="text" id="ofAlias">
+<button id="translateBtn" onclick="trans()">변환하기</button>
+<br>
+<br>
+변환된 결과
+<br>
+<br>
+방덱(풀네임)
+<input type="text" id="dfTraslate" size=50>
+vs
+공덱(풀네임)
+<input type="text" id="ofTraslate" size=50>
+<br>
+등록자 닉네임(필수아님)
+<input type="text" id="nick">
+<button id="regBtn" onclick="register()">등록하기</button>
+
+</body>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script>
+
+function trans(){
+	
+	var dfAlias = $('#dfAlias').val()
+	var ofAlias = $('#ofAlias').val()
+	
+	$.ajax({
+        url:'http://localhost:8090/adminTranslate',
+        type:'POST',
+        contentType : "application/json; charset=utf-8",
+        data: JSON.stringify({
+        	dfAlias : dfAlias,
+        	ofAlias : ofAlias
+        }),
+        dataType:'json', // 리턴해주는 타입을 지정해줘야함
+        beforeSend:function(json) {
+            console.log("ajax호출전");
+        },// 서버 요청 전 호출 되는 함수 return false; 일 경우 요청 중단
+        success: function(data) {
+            console.log("호출성공");
+            console.log(data);
+           
+            var dfTran = $('#dfTraslate');
+            var ofTran = $('#ofTraslate');
+            
+            dfTran.val(data.df);
+            ofTran.val(data.of);
+            
+            
+        },// 요청 완료 시
+        error:function(json) {
+            console.log("실패입니다.");
+        }// 요청 실패.
+    });
+	
+}
+
+function register(){
+	
+	
+	var dfFull = $('#dfTraslate').val()
+	var ofFull = $('#ofTraslate').val()
+	var nick = $('#nick').val();
+	
+	$.ajax({
+        url:'http://localhost:8090/adminRegister',
+        type:'POST',
+        contentType : "application/json; charset=utf-8",
+        data: JSON.stringify({
+        	dfFull : dfFull,
+        	ofFull : ofFull,
+        	nick : nick
+        }),
+        dataType:'json', // 리턴해주는 타입을 지정해줘야함
+        beforeSend:function(json) {
+            console.log("ajax호출전");
+        },// 서버 요청 전 호출 되는 함수 return false; 일 경우 요청 중단
+        success: function(data) {
+            console.log("호출성공");
+            console.log(data);
+           
+         	alert(data.result);
+            
+            
+        },// 요청 완료 시
+        error:function(json) {
+            console.log("실패입니다.");
+        }// 요청 실패.
+    });
+	
+	
+	
+}
+
+
+</script>
+</html>

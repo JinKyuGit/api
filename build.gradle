@@ -21,6 +21,7 @@ dependencies {
 	compile 'org.springframework.boot:spring-boot-starter-jdbc'
     compile 'org.bgee.log4jdbc-log4j2:log4jdbc-log4j2-jdbc4:1.16'
     testCompile("org.springframework.boot:spring-boot-starter-test") // test complie 추가
+    compile group: 'org.springframework.boot', name: 'spring-boot-devtools', version: '2.0.4.RELEASE'
 }
 
 test {

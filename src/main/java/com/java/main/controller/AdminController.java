@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.java.main.bo.AdminBo;
 import com.java.main.bo.ArenaInfoBo;
+import com.java.main.bo.TraslationBo;
 import com.java.main.service.AdminService;
 import com.java.main.service.ArenaService;
 
@@ -91,6 +92,22 @@ public class AdminController {
 			arenaSerivce.insertByFile();
 			
 			resultMap.put("result", "OK");
+			
+			return resultMap;
+		}
+		
+		@RequestMapping("/adminTranslate")
+		public Map<String, Object> adminTranslate(@RequestBody TraslationBo param) throws Exception{
+			
+			Map<String, Object> resultMap = adminService.translate(param);
+			
+			return resultMap;
+		}
+		
+		@RequestMapping("/adminRegister")
+		public Map<String, Object> adminRegister(@RequestBody TraslationBo param) throws Exception{
+			
+			Map<String, Object> resultMap = adminService.arenaRegisterByAdmin(param);
 			
 			return resultMap;
 		}
