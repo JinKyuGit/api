@@ -46,7 +46,7 @@ function trans(){
 	var ofAlias = $('#ofAlias').val()
 	
 	$.ajax({
-        url:'http://localhost:8090/adminTranslate',
+        url:'https:apt-hitya.com/adminTranslate',
         type:'POST',
         contentType : "application/json; charset=utf-8",
         data: JSON.stringify({
@@ -84,7 +84,7 @@ function register(){
 	var nick = $('#nick').val();
 	
 	$.ajax({
-        url:'http://localhost:8090/adminRegister',
+        url:'https:apt-hitya.com/adminRegister',
         type:'POST',
         contentType : "application/json; charset=utf-8",
         data: JSON.stringify({

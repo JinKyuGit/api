@@ -39,7 +39,7 @@ ID 목록
 window.onload = function(){
 	
 	$.ajax({
-        url:'http://localhost:8090/getChacterInfo',
+        url:'https:apt-hitya.com/getChacterInfo',
         type:'POST',
         contentType : "application/json; charset=utf-8",
         data: JSON.stringify({
@@ -78,7 +78,7 @@ function search(){
 	var df5 = $('#id5').val()
 	
 	$.ajax({
-        url:'http://localhost:8090/searchArenaAdmin',
+        url:'https:apt-hitya.com/searchArenaAdmin',
         type:'POST',
         contentType : "application/json; charset=utf-8",
         data: JSON.stringify({
@@ -120,7 +120,7 @@ function deleteDeck(){
 	var deckNo = $('#deckNo').val()
 	
 	$.ajax({
-        url:'http://localhost:8090/deleteArena',
+        url:'https:apt-hitya.com/deleteArena',
         type:'POST',
         contentType : "application/json; charset=utf-8",
         data: JSON.stringify({
