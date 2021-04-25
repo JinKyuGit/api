@@ -71,9 +71,9 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public  Map<String, Object> insertText(BoardBo param) throws Exception {
+	public  BoardBo insertText(BoardBo param) throws Exception {
 		
-		Map<String, Object> resultMap = new HashMap<>();
+		BoardBo resultBo = new BoardBo();
 		
 		
 		try {
@@ -81,16 +81,17 @@ public class BoardServiceImpl implements BoardService {
 			int result = boardDao.insertText(param);
 			
 			if(result == 1) {
-				resultMap.put("message", "등록되었습니다.");
+				resultBo.setResultMsg("등록되었습니다.");
 			}else {
-				resultMap.put("message", "에러발생. 히트야에게 문의");
+				resultBo.setResultMsg("에러발생. 히트야에게 문의");
 			}
 			
 		} catch(Exception e) {
-			resultMap.put("message", "에러발생. 히트야에게 문의 "+e.getMessage());
+			resultBo.setResultMsg("에러발생. 히트야에게 문의. "+e.getMessage());
+			
 		}
 
-		return resultMap;
+		return resultBo;
 				
 	}
 

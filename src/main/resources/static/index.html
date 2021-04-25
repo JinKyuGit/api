@@ -57,7 +57,7 @@ function getList(currentPage){
 	this.currentPage = currentPage
 	
 	$.ajax({
-        url:'https://api-hitya.com/selectBoardList',
+        url:'/selectBoardList',
         type:'POST',
         contentType : "application/json; charset=utf-8",
         data: JSON.stringify({
@@ -112,12 +112,8 @@ function getList(currentPage){
             			pagination.append("<li class='active' onclick='getList("+i+")'><a href='#'>"+i+"</a></li>")
             		}else {
             			pagination.append("<li><a href='#' onclick='getList("+i+")'>"+i+"</a></li>")
-            		}
-            		
+            		}	
             	}
-            	
-            	
-            	
             }        
         },// 요청 완료 시
         error:function(json) {

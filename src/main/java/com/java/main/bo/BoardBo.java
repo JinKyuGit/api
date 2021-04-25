@@ -14,7 +14,17 @@ public class BoardBo extends CommonBo {
 	private int limit;
 	private int offset;
 	private int totalPage;
+	private String resultMsg;
 	
+	
+	
+	
+	public String getResultMsg() {
+		return resultMsg;
+	}
+	public void setResultMsg(String resultMsg) {
+		this.resultMsg = resultMsg;
+	}
 	private List<BoardBo> list;
 	
 	public List<BoardBo> getList() {

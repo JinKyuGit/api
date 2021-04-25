@@ -10,5 +10,5 @@ public interface BoardService {
 	
 	public BoardBo selectText(BoardBo param) throws Exception;
 	
-	public Map<String, Object> insertText(BoardBo param) throws Exception;
+	public BoardBo insertText(BoardBo param) throws Exception;
 }
