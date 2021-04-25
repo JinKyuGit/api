@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="boardDao">
+
+<select id="selectBoardListCount" resultType="com.java.main.bo.BoardBo" parameterType="com.java.main.bo.BoardBo">
+
+select
+ count(1) as count
+from board
+where 1=1
+<if test="title">
+and title like concat('%',#{title}, '%')
+</if>
+
+</select>
+
+<select id="selectBoardList"  resultType="com.java.main.bo.BoardBo" parameterType="com.java.main.bo.BoardBo">
+
+  select 
+	   A.text_no as textNo
+	  ,A.title as title
+	  ,A.content as content
+	  ,A.reg_nick as regNick
+	  ,date_format(A.reg_date, '%Y-%m-%d') as regDate
+  from
+	       (
+			select *
+			from board
+			where 1=1
+			<if test="title != null and title != '' ">
+			and title like concat('%',#{title}, '%')
+			</if>
+			order by reg_date desc
+			) A
+   LIMIT #{limit} OFFSET #{offset}
+
+</select>
+
+<select id="selectText"  resultType="com.java.main.bo.BoardBo" parameterType="com.java.main.bo.BoardBo">
+ select
+   title as title
+  ,content as content
+  ,reg_nick as regNick
+  ,date_format(reg_date, '%Y-%m-%d') as regDate
+ from board
+ where text_no = #{textNo}
+</select>
+
+<insert id="insertText" parameterType="com.java.main.bo.BoardBo">
+ 
+ insert into board
+ (
+  title
+ ,content
+ ,reg_nick
+ ,reg_date
+ )
+ values
+ (
+ #{title}
+ ,#{content}
+ ,#{regNick}
+ ,NOW()
+ )
+</insert>
+
+</mapper>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>관리자 페이지</title>
+</head>
+<body>
+<h1>관리자 페이지에 오신 것을 환영합니다.</h1>
+아이디 : <input type="text" id="id">
+비밀번호 : <input type="password" id = "password">
+<button id="loginBtn" onclick="login()">로그인</button>
+</body>
+
+
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script>
+
+function login(){
+	
+	var id = $('#id').val()
+	var password = $('#password').val()
+	
+	if(undefined == id || "" == id){
+		alert("아이디를 입력해주세요.")
+		return false;
+	}
+	
+	if(undefined == password || "" == password){
+		alert("비밀번호를 입력해주세요.")
+		return false;
+	}
+	
+	
+	 $.ajax({
+	        url:'https://api-hitya.com/adminLogin',
+	        type:'POST',
+	        contentType : "application/json; charset=utf-8",
+	        data: JSON.stringify({
+	            id : id,
+	            password : password
+	        }),
+	        dataType:'json', // 리턴해주는 타입을 지정해줘야함
+	        beforeSend:function(json) {
+	            console.log("ajax호출전");
+	        },// 서버 요청 전 호출 되는 함수 return false; 일 경우 요청 중단
+	        success: function(data) {
+	            console.log("호출성공");
+	            console.log(data);
+	            
+	            if(undefined == data.result || null == data.result){
+	            	alert("아이디가 없거나 비밀번호가 틀립니다.");
+	            }else {
+	            	location.href = 'admin.html';
+	            }
+	            
+	        },// 요청 완료 시
+	        error:function(json) {
+	            console.log("실패입니다.");
+	        }// 요청 실패.
+	    });
+} // login
+
+
+
+</script>
+</html>
