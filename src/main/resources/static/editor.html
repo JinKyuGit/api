@@ -73,13 +73,13 @@ function regText(){
         success: function(data) {
             console.log("호출성공");
             console.log(data);        
-            alert(data.result.message);
         },// 요청 완료 시
         error:function(json) {
             console.log("실패입니다.");
         }// 요청 실패.
     });
 	
+	alert("작성완료");
 	
 }
 
