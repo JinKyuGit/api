@@ -8,7 +8,7 @@ select
  count(1) as count
 from board
 where 1=1
-<if test="title">
+<if test="title != null and title != '' ">
 and title like concat('%',#{title}, '%')
 </if>
 

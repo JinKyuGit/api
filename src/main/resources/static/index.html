@@ -26,10 +26,13 @@
 	<div align="center">
 		<ul class="pagination" id="pagination">
 		</ul>
+    </div>
+    
 	<div align="right">
+	<input type="text" placeHolder="제목 검색" id="keyword">
+	<button onclick="search()">검색</button>
 	<button onclick="regText()">글쓰기</button>
 	</div>
-</div>
 
 
 </div>
@@ -46,6 +49,7 @@
 var totalCount = 0;
 var currentPage = 1;
 var totalPage = 0;
+var title = '';
 
 //관리자 메뉴 이동.
 function admin(){
@@ -61,7 +65,8 @@ function getList(currentPage){
         type:'POST',
         contentType : "application/json; charset=utf-8",
         data: JSON.stringify({
-        	currentPage : currentPage
+        	currentPage : currentPage,
+        	title : this.title
         }),
         dataType:'json', // 리턴해주는 타입을 지정해줘야함
         beforeSend:function(json) {
@@ -137,7 +142,13 @@ function clickTitle(textNo){
 	location.href="textView.html?textNo="+textNo
 }
 
-
+function search(){
+	
+	this.title = $('#keyword').val();
+	this.getList(this.currentPage);
+	
+	
+}
 
 
 </script>
