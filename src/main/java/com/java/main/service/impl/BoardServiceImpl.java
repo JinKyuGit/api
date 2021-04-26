@@ -73,7 +73,7 @@ public class BoardServiceImpl implements BoardService {
 				cp.setTextNo(loop.getTextNo());
 				CommentBo commentCountBo = commentDao.selectCountComment(cp);
 				
-				if(null != countBo) {				
+				if(null != countBo && countBo.getCount() != 0) {				
 					loop.setTitle(loop.getTitle()+" ["+commentCountBo.getCount()+"]");
 				}
 				
