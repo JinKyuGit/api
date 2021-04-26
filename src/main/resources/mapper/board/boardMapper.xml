@@ -21,7 +21,7 @@ and title like concat('%',#{title}, '%')
 	  ,A.title as title
 	  ,A.content as content
 	  ,A.reg_nick as regNick
-	  ,date_format(A.reg_date, '%Y-%m-%d') as regDate
+	  ,date_format(A.reg_date, '%Y-%m-%d %H:%i:%s') as regDate
   from
 	       (
 			select *
@@ -38,10 +38,11 @@ and title like concat('%',#{title}, '%')
 
 <select id="selectText"  resultType="com.java.main.bo.BoardBo" parameterType="com.java.main.bo.BoardBo">
  select
-   title as title
+    text_no as textNo
+   ,title as title
   ,content as content
   ,reg_nick as regNick
-  ,date_format(reg_date, '%Y-%m-%d') as regDate
+  ,date_format(reg_date, '%Y-%m-%d %H:%i:%s') as regDate
   ,password as password
  from board
  where text_no = #{textNo}

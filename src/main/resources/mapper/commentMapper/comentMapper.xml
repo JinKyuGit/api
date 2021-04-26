@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="commentDao">
+
+
+<select id="selectCountComment" parameterType="com.java.main.bo.CommentBo" resultType="com.java.main.bo.CommentBo">
+
+	select 
+	  count(1) as count
+	from
+	comment
+	where text_no = #{textNo}
+
+</select>
+
+
+<select id="selectListComment" parameterType="com.java.main.bo.CommentBo" resultType="com.java.main.bo.CommentBo">
+
+	select 
+	  comment as comment
+	 ,reg_nick as regNick
+	 ,date_format(reg_date, '%Y-%m-%d %H:%i:%s') as regDate
+	from
+	comment
+	where text_no = #{textNo}
+	order by reg_date
+
+</select>
+
+<insert id="insertComment" parameterType="com.java.main.bo.CommentBo" >
+
+	insert comment
+	(
+	 text_no
+	,comment
+	,reg_nick
+    ,reg_date
+	)
+	values
+	(
+	 #{textNo}
+	,#{comment}
+	,#{regNick}
+	,NOW()
+	)
+	
+</insert>
+
+
+</mapper>

@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.java.main.bo.BoardBo;
+import com.java.main.bo.CommentBo;
 import com.java.main.mapper.BoardDao;
+import com.java.main.mapper.CommentDao;
 import com.java.main.service.BoardService;
 
 @Service
@@ -16,6 +18,9 @@ public class BoardServiceImpl implements BoardService {
 
 	@Autowired
 	private BoardDao boardDao;
+	
+	@Autowired
+	private CommentDao commentDao;
 	
 	@Override
 	public BoardBo selectBoardList(BoardBo param) throws Exception {
@@ -60,6 +65,19 @@ public class BoardServiceImpl implements BoardService {
 		
 		if(null != list) {
 			resultBo.setList(list);
+			
+			//댓글 서비스
+			for(BoardBo loop : resultBo.getList()) {
+				
+				CommentBo cp = new CommentBo();
+				cp.setTextNo(loop.getTextNo());
+				CommentBo commentCountBo = commentDao.selectCountComment(cp);
+				
+				if(null != countBo) {				
+					loop.setTitle(loop.getTitle()+" ["+commentCountBo.getCount()+"]");
+				}
+				
+			}
 		}
 	
 		return resultBo;
@@ -67,7 +85,19 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public BoardBo selectText(BoardBo param) throws Exception {
-		return boardDao.selectText(param);
+		BoardBo resultBo =  boardDao.selectText(param);
+		
+		
+		CommentBo cp = new CommentBo();
+		cp.setTextNo(resultBo.getTextNo());
+		List<CommentBo> list = commentDao.selectListComment(cp);
+		
+		if(null != list) {
+			resultBo.setCommentList(list);
+		}
+		
+		
+		return resultBo;
 	}
 
 	@Override

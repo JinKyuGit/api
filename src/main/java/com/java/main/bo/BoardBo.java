@@ -16,10 +16,18 @@ public class BoardBo extends CommonBo {
 	private int totalPage;
 	private String resultMsg;
 	private String password;
+	private List<BoardBo> list;
+	private List<CommentBo> commentList;
 	
 	
 	
 	
+	public List<CommentBo> getCommentList() {
+		return commentList;
+	}
+	public void setCommentList(List<CommentBo> commentList) {
+		this.commentList = commentList;
+	}
 	public String getPassword() {
 		return password;
 	}
@@ -32,7 +40,7 @@ public class BoardBo extends CommonBo {
 	public void setResultMsg(String resultMsg) {
 		this.resultMsg = resultMsg;
 	}
-	private List<BoardBo> list;
+
 	
 	public List<BoardBo> getList() {
 		return list;
