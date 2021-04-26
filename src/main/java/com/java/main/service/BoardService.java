@@ -11,4 +11,8 @@ public interface BoardService {
 	public BoardBo selectText(BoardBo param) throws Exception;
 	
 	public BoardBo insertText(BoardBo param) throws Exception;
+	
+	public BoardBo updateText(BoardBo param) throws Exception;
+	
+	public BoardBo deleteText(BoardBo param) throws Exception;
 }

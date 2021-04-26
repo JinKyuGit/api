@@ -15,10 +15,17 @@ public class BoardBo extends CommonBo {
 	private int offset;
 	private int totalPage;
 	private String resultMsg;
+	private String password;
 	
 	
 	
 	
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
 	public String getResultMsg() {
 		return resultMsg;
 	}

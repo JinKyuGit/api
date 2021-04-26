@@ -42,6 +42,7 @@ and title like concat('%',#{title}, '%')
   ,content as content
   ,reg_nick as regNick
   ,date_format(reg_date, '%Y-%m-%d') as regDate
+  ,password as password
  from board
  where text_no = #{textNo}
 </select>
@@ -54,6 +55,7 @@ and title like concat('%',#{title}, '%')
  ,content
  ,reg_nick
  ,reg_date
+ ,password
  )
  values
  (
@@ -61,7 +63,19 @@ and title like concat('%',#{title}, '%')
  ,#{content}
  ,#{regNick}
  ,NOW()
+ ,#{password}
  )
 </insert>
 
+<update id="updateText" parameterType="com.java.main.bo.BoardBo">
+update board
+set title = #{title}
+, content = #{content}
+where text_no = #{textNo}
+</update>
+
+<delete id="deleteText" parameterType="com.java.main.bo.BoardBo">
+delete from board
+where text_no = #{textNo}
+</delete>
 </mapper>

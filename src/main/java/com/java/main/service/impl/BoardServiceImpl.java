@@ -95,4 +95,54 @@ public class BoardServiceImpl implements BoardService {
 				
 	}
 
+	@Override
+	public BoardBo updateText(BoardBo param) throws Exception {
+		
+		BoardBo resultBo = new BoardBo();
+		
+		
+		try {
+			
+			int result = boardDao.updateText(param);
+			
+			if(result == 1) {
+				resultBo.setResultMsg("수정되었습니다.");
+			}else {
+				resultBo.setResultMsg("에러발생. 히트야에게 문의");
+			}
+			
+		} catch(Exception e) {
+			resultBo.setResultMsg("에러발생. 히트야에게 문의. "+e.getMessage());
+			
+		}
+
+		return resultBo;
+		
+	}
+
+	@Override
+	public BoardBo deleteText(BoardBo param) throws Exception {
+
+
+		BoardBo resultBo = new BoardBo();
+		
+		
+		try {
+			
+			int result = boardDao.deleteText(param);
+			
+			if(result == 1) {
+				resultBo.setResultMsg("삭제되었습니다.");
+			}else {
+				resultBo.setResultMsg("에러발생. 히트야에게 문의");
+			}
+			
+		} catch(Exception e) {
+			resultBo.setResultMsg("에러발생. 히트야에게 문의. "+e.getMessage());
+			
+		}
+
+		return resultBo;
+	}
+
 }

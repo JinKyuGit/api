@@ -29,4 +29,12 @@ public class BoardDao extends CommonDao {
 	public int insertText(BoardBo param) throws Exception{
 		return insert("insertText", param);
 	}
+	
+	public int updateText(BoardBo param) throws Exception {
+		return update("updateText", param);
+	}
+	
+	public int deleteText(BoardBo param) throws Exception {
+		return update("deleteText", param);
+	}
 }

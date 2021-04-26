@@ -6,7 +6,6 @@
 </head>
 <body>
 <div class="container">
-<form>
 <div class="form-group">
   <label for="usr">제목:</label>
   <input type="text" class="form-control" id="title" readonly>
@@ -24,8 +23,13 @@
   <input type="text" class="form-control" id="regDate" readonly>
 </div>
 <div align="left">
+<input type="password"  id="password" placeholder="비밀번호 입력">
+<button onclick="check()">확인</button>
+<div id="btnDiv">
+<button onclick="update()">수정</button>
+<button onclick="del()">삭제</button>
 </div>
-</form>
+</div>
 <div align="right">
 <button onclick="list()">목록으로</button>
 </div>
@@ -37,6 +41,8 @@
 
 <script>
 
+$('#btnDiv').hide();
+
 function getParameterByName(name, url = window.location.href) {
     name = name.replace(/[\[\]]/g, '\\$&');
     var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
@@ -46,9 +52,12 @@ function getParameterByName(name, url = window.location.href) {
     return decodeURIComponent(results[2].replace(/\+/g, ' '));
 }
 
+var password = '';
+var textNo = '';
+
 window.onload = function(){
 	
-	var textNo = getParameterByName('textNo');
+	this.textNo = getParameterByName('textNo');
 	
 	$.ajax({
         url:'/selectText',
@@ -59,29 +68,116 @@ window.onload = function(){
         }),
         dataType:'json', // 리턴해주는 타입을 지정해줘야함
         beforeSend:function(json) {
-            console.log("ajax호출전");
+            //console.log("ajax호출전");
         },// 서버 요청 전 호출 되는 함수 return false; 일 경우 요청 중단
         success: function(data) {
-            console.log("호출성공");
-            console.log(data);        
+            //console.log("호출성공");
+            //console.log(data);        
           
         	$('#title').val(data.result.title);
         	$('#content').val(data.result.content);
         	$('#regNick').val(data.result.regNick);
         	$('#regDate').val(data.result.regDate);
-            
+        	password = data.result.password;
             
         },// 요청 완료 시
         error:function(json) {
-            console.log("실패입니다.");
+           // console.log("실패입니다.");
         }// 요청 실패.
     });
 	
 	
 }
 
+//목록으로 이동
 function list(){
 	location.href="index.html";
+}
+
+
+function update(){
+	
+	var title = $('#title').val();
+	var content = $('#content').val();
+	
+	if(undefined == title || title == null || title == ""){
+		alert("제목을 입력하세요.");
+		return false;
+	}
+	if(undefined == content || content == null || content == ""){
+		alert("내용을 입력하세요.");
+		return false;
+	}
+	
+	
+	$.ajax({
+        url:'/updateText',
+        type:'POST',
+        contentType : "application/json; charset=utf-8",
+        data: JSON.stringify({
+        	title : title,
+        	content : content,
+        	textNo : this.textNo
+        }),
+        dataType:'json', // 리턴해주는 타입을 지정해줘야함
+        beforeSend:function(json) {
+            console.log("ajax호출전");
+        },// 서버 요청 전 호출 되는 함수 return false; 일 경우 요청 중단
+        success: function(data) {
+            console.log("호출성공");
+            console.log(data);     
+            alert(data.result.resultMsg);
+            window.location = 'index.html';
+        },// 요청 완료 시
+        error:function(json) {
+            console.log("실패입니다.");
+        }// 요청 실패.
+    });
+	
+
+}
+
+function del(){
+
+	$.ajax({
+        url:'/deleteText',
+        type:'POST',
+        contentType : "application/json; charset=utf-8",
+        data: JSON.stringify({
+        	textNo : this.textNo
+        }),
+        dataType:'json', // 리턴해주는 타입을 지정해줘야함
+        beforeSend:function(json) {
+            console.log("ajax호출전");
+        },// 서버 요청 전 호출 되는 함수 return false; 일 경우 요청 중단
+        success: function(data) {
+            console.log("호출성공");
+            console.log(data);     
+            alert(data.result.resultMsg);
+            window.location = 'index.html';
+        },// 요청 완료 시
+        error:function(json) {
+            console.log("실패입니다.");
+        }// 요청 실패.
+    });
+	
+}
+
+function check(){
+	
+	var pwd = $('#password').val();
+	
+	if(pwd == password){
+		$('#btnDiv').show();
+		
+    	$('#title').attr('readonly', false);
+    	$('#content').attr('readonly', false);
+		
+	}else {
+		alert("비밀번호가 다릅니다.");
+		return false;
+	}
+	
 }
 
 </script>

@@ -48,4 +48,26 @@ public class BoardController {
 		return resultMap;
 
 	}
+	
+	@RequestMapping("/updateText")
+	public Map<String, Object> updateText(@RequestBody BoardBo param) throws Exception{
+		
+		Map<String, Object> resultMap = new HashMap<>();
+		
+		resultMap.put("result", boardService.updateText(param));
+		
+		return resultMap;
+
+	}
+	
+	@RequestMapping("/deleteText")
+	public Map<String, Object> deleteText(@RequestBody BoardBo param) throws Exception{
+		
+		Map<String, Object> resultMap = new HashMap<>();
+		
+		resultMap.put("result", boardService.deleteText(param));
+		
+		return resultMap;
+
+	}
 }
