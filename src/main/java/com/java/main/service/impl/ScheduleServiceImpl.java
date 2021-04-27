@@ -110,13 +110,13 @@ public class ScheduleServiceImpl implements ScheduleService {
 	    
 		//예외처리.
 		if(null == todayBo || null == todayBo.getJob()) {
-			result.setToday("미정");
+			result.setToday("오늘("+todayPrefix+") : "+"미정(공지없음)");
 		}else {
 			result.setToday("오늘("+todayPrefix+") : "+todayBo.getJob());
 		}
 		
 		if(null == tomorrowBo || null == tomorrowBo.getJob()) {
-			result.setTomorrow("미정");
+			result.setTomorrow("내일("+tomorrowPrefix+") : "+"미정(공지없음)");
 		}else {
 			result.setTomorrow("내일("+tomorrowPrefix+") : "+tomorrowBo.getJob());
 		}
