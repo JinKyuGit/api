@@ -18,7 +18,8 @@ public class DatabaseConfig {
 		SqlSessionFactoryBean sqlSessionFactory = new SqlSessionFactoryBean(); 
 		sqlSessionFactory.setDataSource(datasource); 
 		//sqlSessionFactory.setTypeAliasesPackage("com.java.dogle.mapper"); 
-		sqlSessionFactory.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath:/mapper/**/*.xml")); return sqlSessionFactory.getObject(); 
+		sqlSessionFactory.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath:/mapper/**/*.xml")); 
+		return sqlSessionFactory.getObject(); 
 	}
 	
 	
